@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "add.js",
+  "scripts": {
+    "start": "nodemon test.js",
+    "start-server": "node test.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuchiBankoti/nodejs-practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SuchiBankoti/nodejs-practice/issues"
+  },
+  "homepage": "https://github.com/SuchiBankoti/nodejs-practice#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

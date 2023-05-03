@@ -4,16 +4,16 @@ const bodyParser = require("body-parser");
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.get("/", (req, res) => {
+router.get("/add-product", (req, res) => {
   res.send(`<div>
-    <form action='/product' method='post'>
-    <label>product</label>
-    <input type='text' name='product'/>
-    <label>size</label>
-    <input  type='number' name='size'/>
-    <input type='submit' value='submit'/>
-    </form>
-  </div>`);
+      <form action='/product' method='post'>
+      <label>product</label>
+      <input type='text' name='product'/>
+      <label>size</label>
+      <input  type='number' name='size'/>
+      <input type='submit' value='submit'/>
+      </form>
+    </div>`);
 });
 
 router.post("/product", (req, res) => {

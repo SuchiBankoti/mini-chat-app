@@ -1,1 +1,1 @@
-message=new+msg
+message=upadte

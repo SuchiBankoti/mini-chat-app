@@ -1,9 +1,7 @@
 const express = require("express");
 const app = express();
-const admin = require("./routes/admin");
-const shop = require("./routes/shop");
-app.use(admin);
-app.use(shop);
+const route = require("./route");
+app.use(route);
 
 const catchBadRoute = (req, res, next) => {
   res.status(404).send("<h1>Page not found</h1>");

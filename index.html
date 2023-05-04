@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div id="chats"></div>
+      <form onsubmit="sendMessage()">
+        <input type="text" name="message" id="message" />
+        <input type="submit" value="submit" />
+      </form>
+      <form action="/login" method="get" id="login">
+        <input type="submit" value="login here" />
+      </form>
+    </div>
+    <script>
+      if (localStorage.getItem("username")) {
+        const login = document.getElementById("login");
+        login.style.display = "none";
+      }
+
+      FetchChat();
+
+      async function sendMessage() {
+        event.preventDefault();
+
+        const username = localStorage.getItem("username");
+        const message = document.getElementById("message").value;
+        if (!username) {
+          alert("Please login");
+        } else {
+          const myObj = {
+            username: username,
+            message: message,
+          };
+
+          await fetch("/message", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(myObj),
+          });
+        }
+        await FetchChat();
+      }
+      async function FetchChat() {
+        const response = await fetch("/all-chats");
+        const chat_data = await response.json();
+        const chat_box = document.getElementById("chats");
+        if (chat_data.length === 0) {
+          chat_box.textContent = "No chats Exist";
+        } else {
+          chat_box.textContent = "";
+          chat_data.forEach((msg) => {
+            const p = document.createElement("p");
+            p.textContent = `${msg.username}:${msg.message}`;
+            chat_box.appendChild(p);
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,62 +1,27 @@
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
-const path = require("path");
-const rootDir = require("./util/path");
-const fs = require("fs");
 router.use(express.json());
 router.use(bodyParser.urlencoded({ extended: true }));
+const {
+  getHome,
+  getAllChats,
+  getContact,
+  getLogin,
+  getSuccess,
+  postMsg,
+  postUser,
+} = require("./controllers/products");
 
-router.get("/", (req, res) => {
-  const home = fs.readFileSync(
-    path.join(rootDir, "views", "index.html"),
-    "utf-8"
-  );
-  res.send(home);
-});
-router.get("/login", (req, res) => {
-  const login = fs.readFileSync(
-    path.join(rootDir, "views", "login.html"),
-    "utf-8"
-  );
-  res.send(login);
-});
+router.get("/", getHome);
+router.get("/login", getLogin);
 
-router.get("/all-chats", (req, res) => {
-  const data = fs.readFileSync(path.join(rootDir, "data.json"), "utf8");
-  const chats = JSON.parse(data);
-  res.json(chats);
-});
+router.get("/all-chats", getAllChats);
 
-router.post("/message", (req, res) => {
-  const username = req.body.username;
-  const message = req.body.message;
+router.post("/message", postMsg);
 
-  let data = fs.readFileSync(path.join(rootDir, "data.json"), "utf-8");
+router.post("/user", postUser);
 
-  if (data == "") {
-    data = "[]";
-  }
-  let dataArray = JSON.parse(data);
-  let newMessage = { username: username, message: message };
-  dataArray.push(newMessage);
-  fs.writeFileSync(path.join(rootDir, "data.json"), JSON.stringify(dataArray));
-
-  res.json(dataArray);
-});
-
-router.post("/user", (req, res) => {
-  res.redirect("/");
-});
-
-router.get("/contactUS", (req, res) => {
-  const contact = fs.readFileSync(
-    path.join(rootDir, "views", "contact.html"),
-    "utf-8"
-  );
-  res.send(contact);
-});
-router.get("/success", (req, res) => {
-  res.send("Form Successfully filled");
-});
+router.get("/contactUS", getContact);
+router.get("/success", getSuccess);
 module.exports = router;

@@ -1,33 +1,27 @@
 const path = require("path");
 const rootDir = require("../util/path");
 const fs = require("fs");
-
+const { readFile, readFileData } = require("../models/model");
 const getHome = (req, res) => {
-  const home = fs.readFileSync(
-    path.join(rootDir, "views", "index.html"),
-    "utf-8"
-  );
+  const home = readFile("index.html");
   res.send(home);
 };
 const getLogin = (req, res) => {
-  const login = fs.readFileSync(
-    path.join(rootDir, "views", "login.html"),
-    "utf-8"
-  );
+  const login = readFile("login.html");
+
   res.send(login);
 };
 const getContact = (req, res) => {
-  const contact = fs.readFileSync(
-    path.join(rootDir, "views", "contact.html"),
-    "utf-8"
-  );
+  const contact = readFile("contact.html");
   res.send(contact);
 };
+
 const getSuccess = (req, res) => {
   res.send("Form Successfully filled");
 };
+
 const getAllChats = (req, res) => {
-  const data = fs.readFileSync(path.join(rootDir, "data.json"), "utf8");
+  const data = readFileData("data.json");
   const chats = JSON.parse(data);
   res.json(chats);
 };
@@ -35,7 +29,7 @@ const postMsg = (req, res) => {
   const username = req.body.username;
   const message = req.body.message;
 
-  let data = fs.readFileSync(path.join(rootDir, "data.json"), "utf-8");
+  let data = readFileData("data.json");
 
   if (data == "") {
     data = "[]";

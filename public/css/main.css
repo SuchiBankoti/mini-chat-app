@@ -59,7 +59,7 @@ a {
   background-color: white;
   margin-top: 10px;
 }
-.login-go {
+#login {
   width: 200px;
   height: 50px;
   display: flex;

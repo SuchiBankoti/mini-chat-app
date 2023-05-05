@@ -1,10 +1,20 @@
 const express = require("express");
 const app = express();
 const route = require("./route");
+const path = require("path");
+
+const rootDir = require("./util/path");
+
+app.use(express.static(path.join(__dirname, "public")));
 app.use(route);
+const fs = require("fs");
 
 const catchBadRoute = (req, res, next) => {
-  res.status(404).send("<h1>Page not found</h1>");
+  const notFound = fs.readFileSync(
+    path.join(rootDir, "views", "notFound.html"),
+    "utf-8"
+  );
+  res.status(404).send(notFound);
   next();
 };
 app.use(catchBadRoute);

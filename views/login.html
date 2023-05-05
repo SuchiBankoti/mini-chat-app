@@ -5,14 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/login.css" />
   </head>
   <body>
-    <div>
-      <h1>Please Login</h1>
-      <form onSubmit="setUserToLocal()" action="/user" method="post">
+    <div class="navbar">
+      <a href="/contactUs">Contact Us</a>
+    </div>
+    <div class="login-container">
+      <h3 class="login-heading">Please Login</h3>
+      <form
+        onSubmit="setUserToLocal()"
+        action="/user"
+        method="post"
+        class="login-form"
+      >
         <label>Username</label>
-        <input type="text" name="username" id="username" />
-        <input type="submit" value="submit" />
+        <input type="text" name="username" id="username" required />
+        <input type="submit" value="login" class="login" />
       </form>
     </div>
     <script>

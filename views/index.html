@@ -39,32 +39,26 @@
 
       async function sendMessage() {
         event.preventDefault();
-
         const username = localStorage.getItem("username");
         const message = document.getElementById("message").value;
-        if (!username) {
-          alert("Please login");
-        } else if (!message) {
-          alert("please enter valid text");
-        } else {
-          const myObj = {
-            username: username,
-            message: message,
-          };
-
-          await fetch("/message", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(myObj),
-          });
-        }
-        await FetchChat();
+        const myObj = {
+          username: username,
+          message: message,
+        };
+        await fetch("/message", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(myObj),
+        });
+        // FetchChat();
       }
       async function FetchChat() {
         const response = await fetch("/all-chats");
+        console.log(response);
         const chat_data = await response.json();
+        console.log(chat_data);
         const chat_box = document.getElementById("chats");
         if (chat_data.length === 0) {
           chat_box.textContent = "No chats Exist";

@@ -10,9 +10,8 @@ const readFile = (filename) => {
   return content;
 };
 
-const readFileData = (filename) => {
-  const data = fs.readFileSync(path.join(rootDir, `${filename}`), "utf8");
-  return data;
-};
-
-module.exports = { readFile, readFileData };
+// const readFileData = (filename) => {
+//   const data = fs.readFileSync(path.join(rootDir, `${filename}`), "utf8");
+//   return data;
+// };
+module.exports = { readFile };

@@ -6,9 +6,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 const {
   getHome,
   getAllChats,
-  getContact,
   getLogin,
-  getSuccess,
   postMsg,
   postUser,
 } = require("./controllers/products");
@@ -22,6 +20,4 @@ router.post("/message", postMsg);
 
 router.post("/user", postUser);
 
-router.get("/contactUS", getContact);
-router.get("/success", getSuccess);
 module.exports = router;

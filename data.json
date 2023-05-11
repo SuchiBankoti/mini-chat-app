@@ -1,1 +1,9 @@
-[{"username":"suchi","message":"coding"},{"username":"suchi","message":"movie"},{"username":"kunal","message":"rafting"},{"username":"kunal","message":"swiming"},{"username":"newuser","message":"new stuff"},{"username":"currentuser","message":"current stuff"},{"username":"suchi","message":"new message"}]
+[
+  { "username": "suchi", "message": "coding" },
+  { "username": "suchi", "message": "movie" },
+  { "username": "kunal", "message": "rafting" },
+  { "username": "kunal", "message": "swiming" },
+  { "username": "newuser", "message": "new stuff" },
+  { "username": "currentuser", "message": "current stuff" },
+  { "username": "suchi", "message": "new message" }
+]

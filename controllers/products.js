@@ -1,5 +1,28 @@
-const db = require("../util/database");
+// const db = require("../util/database");
 const { readFile } = require("../models/model");
+
+const Sequelize = require("sequelize");
+
+const sequelize = new Sequelize("new_schema", "root", "s_qs@ym_i#22", {
+  host: "localhost",
+  dialect: "mysql",
+});
+
+const User = sequelize.define("users", {
+  username: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  message: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+});
+
+sequelize
+  .sync()
+  .then(() => console.log("Users table created successfully."))
+  .catch((error) => console.log(`Error creating users table: ${error}`));
 
 const getHome = (req, res) => {
   const home = readFile("index.html");
@@ -13,18 +36,24 @@ const getLogin = (req, res) => {
 };
 
 const getAllChats = (req, res) => {
-  db.execute("SELECT * FROM chats")
-    .then((data) => res.json(data[0]))
-    .catch((err) => console.log(err));
+  User.findAll({
+    attributes: ["username", "message"],
+  })
+    .then((users) => {
+      const usersJSON = users.map((user) => user.toJSON());
+      res.json(usersJSON);
+    })
+    .catch((error) => console.log(`Error reading users: ${error}`));
 };
 const postMsg = (req, res) => {
   const username = req.body.username;
   const message = req.body.message;
-  db.query(
-    `INSERT INTO chats(username, message) VALUES("${username}","${message}")`
-  )
-    .then((data) => res.redirect("/all-chats"))
-    .catch((err) => console.log(err));
+  User.create({
+    username: `${username}`,
+    message: `${message}`,
+  })
+    .then((user) => console.log("message created"))
+    .catch((error) => console.log(`Error creating user: ${error}`));
 };
 
 const postUser = (req, res) => {

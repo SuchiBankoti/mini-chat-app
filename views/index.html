@@ -34,8 +34,11 @@
         const login = document.getElementById("login");
         login.style.display = "none";
       }
-
       FetchChat();
+
+      setInterval(() => {
+        FetchChat();
+      }, 500);
 
       async function sendMessage() {
         event.preventDefault();
@@ -52,13 +55,10 @@
           },
           body: JSON.stringify(myObj),
         });
-        // FetchChat();
       }
       async function FetchChat() {
         const response = await fetch("/all-chats");
-        console.log(response);
         const chat_data = await response.json();
-        console.log(chat_data);
         const chat_box = document.getElementById("chats");
         if (chat_data.length === 0) {
           chat_box.textContent = "No chats Exist";
